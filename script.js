@@ -39,7 +39,7 @@ const konyvek = [
         "cim": "Harry Potter és a bölcsek köve",
         "szerzo": "J. K. Rowling",
         "kiadasEve": 1997,
-        "kolcsonozve": true
+        "kolcsonozve": false
     },
     {
         "id": 7,
@@ -72,7 +72,7 @@ const konyvek = [
 ]
 
 const Konyvtar = {
-    konyvek: [],
+    konyvek: konyvek,
 
     hazzaAd: function (konyv) {
         this.konyvek.push(konyv);
@@ -96,12 +96,12 @@ const Konyvtar = {
             return konyv.kolcsonozve === false;
         });
     },
-    kolcsonzottListaz : function (){
+    kolcsonzottListaz: function () {
         return this.konyvek.filter(function (konyv) {
             return konyv.kolcsonozve === true;
         });
     },
-    szerzőSzures : function (szerzo) {
+    szerzőSzures: function (szerzo) {
         return this.konyvek.filter(function (konyv) {
             return konyv.szerzo === szerzo;
         });
@@ -109,7 +109,7 @@ const Konyvtar = {
     konyvSum: function () {
         return this.konyvek.length;
     },
-    kolcsonzottekSzama: function(){
+    kolcsonzottekSzama: function () {
         return this.konyvek.reduce(function (count, konyv) {
             return konyv.kolcsonozve ? count + 1 : count;
         }, 0);
@@ -118,7 +118,81 @@ const Konyvtar = {
 
 };
 
+const tableBody = document.getElementById('tableBody');
+function renderTable() {
+    tableBody.innerHTML = '';
+    const konyvek = Konyvtar.listaz();
+    konyvek.forEach(function (konyv) {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${konyv.id}</td>
+            <td>${konyv.cim}</td>
+            <td>${konyv.szerzo}</td>
+            <td>${konyv.kiadasEve}</td>
+            <td>${konyv.kolcsonozve ? 'Igen' : 'Nem'}</td>
+            <td><button class = "kolcsonzes">kolcsonzes</button></td>
+            <td><button class = "torles">torles</button></td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
+
+const UjCimInput = document.getElementById('inputCim');
+const UjSzerzoInput = document.getElementById('inputSzerzo');
+const UjKiadasEveInput = document.getElementById('inputEv');
+const HozzaAdButton = document.getElementById('addGomb');
+
+
+
+HozzaAdButton.addEventListener('click', function () {
+    const ujKonyv = {
+        id: Konyvtar.konyvSum() + 1,
+        cim: UjCimInput.value,
+        szerzo: UjSzerzoInput.value,
+        kiadasEve: parseInt(UjKiadasEveInput.value),
+        kolcsonozve: false
+    };
+    Konyvtar.hazzaAd(ujKonyv);
+    renderTable();
+    UjCimInput.value = '';
+    UjSzerzoInput.value = '';
+    UjKiadasEveInput.value = '';
+});
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    renderTable();
+    const kolcsonzes = document.getElementsByClassName('kolcsonzes');
+    const torles = document.getElementsByClassName('torles');
+    tableBody.addEventListener('click', function (event) {
+        if (event.target.classList.contains('kolcsonzes')) {
+            const row = event.target.closest('tr');
+            const id = parseInt(row.cells[0].textContent);
+            const konyv = Konyvtar.konyvek.find(x => x.id === id);
+            if (konyv && !konyv.kolcsonozve) {
+                konyv.kolcsonozve = true;
+                renderTable();
+            }
+        } else if (event.target.classList.contains('torles')) {
+            const row = event.target.closest('tr');
+            const id = parseInt(row.cells[0].textContent);
+            const konyv = Konyvtar.konyvek.find(x => x.id === id);
+            if (konyv) {
+                Konyvtar.torol(konyv);
+                renderTable();
+            }
+        }
+    });
+});

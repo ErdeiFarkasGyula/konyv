@@ -1,0 +1,67 @@
+body {
+    background: #f4f6fb;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+table {
+    width: 90%;
+    margin: 40px auto 20px auto;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    overflow: hidden;
+}
+
+thead tr {
+    background: #3f51b5;
+    color: #fff;
+    font-size: 1.1rem;
+    text-align: left;
+}
+
+thead tr td, thead tr th, thead tr {
+    padding: 12px 10px;
+}
+
+tbody tr {
+    border-bottom: 1px solid #e3e7ed;
+    transition: background 0.2s;
+}
+
+tbody tr:hover {
+    background: #f0f4ff;
+}
+
+td {
+    padding: 10px 8px;
+    font-size: 1rem;
+}
+
+input[type="text"], input[type="number"] {
+    padding: 8px 12px;
+    border: 1px solid #cfd8dc;
+    border-radius: 6px;
+    font-size: 1rem;
+    margin: 8px 4px;
+    width: 200px;
+    box-sizing: border-box;
+}
+
+button {
+    background: #3f51b5;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 18px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin: 8px 4px;
+    transition: background 0.2s;
+}
+
+button:hover {
+    background: #283593;
+}

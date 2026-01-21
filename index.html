@@ -8,6 +8,34 @@
     <title>Könyvtár</title>
 </head>
 <body>
-    
+    <div class="container">
+        <h1>Könyv nyilvántartó rendszer</h1>
+        <section class="add-book-section">
+            <h2>Könyv hozzáadása</h2>
+            <form id="addBookForm">
+                <input type="text" id="title" placeholder="Cím" required>
+                <input type="text" id="author" placeholder="Szerző" required>
+                <input type="number" id="year" placeholder="Kiadás éve" min="1000" max="2100" required>
+                <button type="submit">Hozzáadás</button>
+            </form>
+        </section>
+        <section class="filter-section">
+            <h2>Szűrés szerző szerint</h2>
+            <input type="text" id="filterAuthor" placeholder="Szerző neve">
+            <button id="filterBtn">Szűrés</button>
+        </section>
+        <section class="stats-section">
+            <div>Összes könyv: <span id="totalBooks">0</span></div>
+            <div>Kölcsönzött könyvek: <span id="borrowedBooks">0</span></div>
+        </section>
+        <section class="books-section">
+            <h2>Elérhető könyvek</h2>
+            <ul id="availableBooks" class="book-list"></ul>
+        </section>
+        <section class="books-section">
+            <h2>Kölcsönzött könyvek</h2>
+            <ul id="borrowedBooksList" class="book-list"></ul>
+        </section>
+    </div>
 </body>
 </html>

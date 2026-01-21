@@ -130,8 +130,8 @@ function renderTable() {
             <td>${konyv.szerzo}</td>
             <td>${konyv.kiadasEve}</td>
             <td>${konyv.kolcsonozve ? 'Igen' : 'Nem'}</td>
-            <td><button class = "kolcsonzes">kolcsonzes</button></td>
-            <td><button class = "torles">torles</button></td>
+            <td><button class = "kolcsonzes">Kölcsönzés</button></td>
+            <td><button class = "torles">Törlés</button></td>
         `;
         tableBody.appendChild(row);
     });
